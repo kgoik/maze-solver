@@ -1,21 +1,25 @@
 from window import Window
-from geometry import Line, Point
+from cell import Cell
 win = Window(800, 600)
 
-x = 0
+x = 1 
 y = 1
-
-for i in range(0, 4):
-    p1 = Point(x, y)
-    if x <= y:
-        x += 50 * i
-    else:
-        y += 50 * i
-
-    p2 = Point(x,y)
-    line = Line(p1, p2)
-
-    win.draw_line(line, "red")
+cell_width = 20
+previous_cell = None
+for i in range(0, 5):
+   sides = [False for j in range(0,4)]
+   if i < 4:
+     sides[i] = True
+   else: 
+      sides = [True for j in range(0,4)]
+   print(sides)
+   cell = Cell(win, sides[0], sides[1], sides[2], sides[3])
+   cell.draw(x, y, x + cell_width, y + cell_width)
+   x += cell_width * 2
+   y += cell_width * 2
+   if previous_cell is not None:
+      previous_cell.draw_move(cell)
+   previous_cell = cell
 
 win.wait_for_close()
 
