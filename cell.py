@@ -36,10 +36,10 @@ class Cell():
         if undo:
             color = "gray"
 
-        middle_x_from = (self._x1 + self._x2) // 2 
-        middle_y_from = (self._y1 + self._y2) // 2 
+        middle_x_from = abs(self._x1 + self._x2) // 2 
+        middle_y_from = abs(self._y1 + self._y2) // 2 
         
-        middle_x_to = (to_cell._x1 + to_cell._x2) // 2 
-        middle_y_to = (to_cell._y1 + to_cell._y2) // 2 
+        middle_x_to = abs(to_cell._x1 + to_cell._x2) // 2 
+        middle_y_to = abs(to_cell._y1 + to_cell._y2) // 2 
         
         self._win.draw_line(Line(Point(middle_x_from, middle_y_from), Point(middle_x_to, middle_y_to)), color)
