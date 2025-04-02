@@ -1,7 +1,7 @@
 from graphics import Line, Point
 
 class Cell():
-    def __init__(self, win, has_left_wall=True, has_right_wall=True, has_top_wall=True, has_bottom_wall=True):
+    def __init__(self, win=None, has_left_wall=True, has_right_wall=True, has_top_wall=True, has_bottom_wall=True):
         self.has_left_wall = has_left_wall
         self.has_right_wall = has_right_wall
         self.has_top_wall = has_top_wall
@@ -19,17 +19,21 @@ class Cell():
         self._y2 = y2
         if self.has_left_wall:
             line = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
-            self._win.draw_line(line, "red")
+            if self._win != None:
+                self._win.draw_line(line, "red")
         if self.has_right_wall:
             line = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
-            self._win.draw_line(line, "red")
+            if self._win != None:
+                self._win.draw_line(line, "red")
         if self.has_top_wall:
             line = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
-            self._win.draw_line(line, "red")
+            if self._win != None:
+                self._win.draw_line(line, "red")
         if self.has_bottom_wall:
             line = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
-            self._win.draw_line(line, "red")
-
+            if self._win != None:
+                self._win.draw_line(line, "red")
+ 
     def draw_move(self, to_cell, undo=False):
         color = "red"
 
