@@ -35,6 +35,17 @@ class Maze():
             for j in range(0, len(self._cells[i])):
                 self._draw_cell(i,j)
 
+        self._break_entrnce_and_exit()
+
+    def _break_entrnce_and_exit(self):
+        self._cells[0][0].has_top_wall = False
+        self._draw_cell(0,0)
+
+        print(self._cells[0][0].has_top_wall)
+
+        self._cells[self.num_cols - 1][self.num_rows - 1].has_bottom_wall = False
+        self._draw_cell(self.num_cols - 1, self.num_rows - 1)
+
     def _draw_cell(self, i, j):
         x1 = self.x1 + (i * self.cell_size_x) 
         y1 = self.y1 + (j * self.cell_size_y) 

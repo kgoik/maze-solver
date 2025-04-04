@@ -1,5 +1,7 @@
 from tkinter import Tk, BOTH, Canvas
-from graphics import Line
+
+BACKGROUND = "white"
+
 class Window():
 
     def __init__(self, width, height):
@@ -9,7 +11,7 @@ class Window():
         self.__root = Tk()
         self.__root.title = "Maze Solver"
 
-        self.__canvas = Canvas(self.__root, bg="white", height=height, width=width) 
+        self.__canvas = Canvas(self.__root, bg=BACKGROUND, height=height, width=width) 
 
         self.__canvas.pack(fill=BOTH, expand=1)
         self.running = False
