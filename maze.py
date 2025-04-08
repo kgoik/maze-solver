@@ -41,6 +41,7 @@ class Maze():
 
         self._break_entrnce_and_exit()
         self._break_walls_r(0,0)
+        self._reset_cells_visited()
 
     def _break_entrnce_and_exit(self):
         self._cells[0][0].has_top_wall = False
@@ -81,6 +82,10 @@ class Maze():
             # self._draw_cell(i,j)
             self._break_walls_r(new_i, new_j)
 
+    def _reset_cells_visited(self):
+        for i in range(0, len(self._cells)):
+            for j in range(0, len(self._cells[i])):
+                self._cells[i][j].visited = False
 
     def _get_unvisited_neighbors(self, i, j):
         neighbors = []
