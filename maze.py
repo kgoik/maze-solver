@@ -23,7 +23,8 @@ class Maze():
         self.cell_size_y = cell_size_y
         self._win = win
         self._cells = []
-        self.seed = random.seed(seed) if seed is not None else 0 
+        if seed:
+            random.seed(seed) 
         self._create_cells()
     
     def _create_cells(self):
