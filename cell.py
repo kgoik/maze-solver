@@ -33,7 +33,7 @@ class Cell():
             self._win.draw_line(line, "red" if self.has_bottom_wall else BACKGROUND)
  
     def draw_move(self, to_cell, undo=False):
-        color = "red"
+        color = "blue"
 
         if undo:
             color = "gray"

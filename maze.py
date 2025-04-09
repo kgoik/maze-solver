@@ -98,6 +98,18 @@ class Maze():
         if j + 1 < len(self._cells[i]) and not self._cells[i][j+1].visited:
             neighbors.append((i, j+1))
         return neighbors
+    
+    def _get_unvisited_neighbors_without_walls(self, i, j):
+        neighbors = []
+        if i - 1 >= 0 and not self._cells[i][j].has_left_wall and not self._cells[i-1][j].visited:
+            neighbors.append((i-1, j))
+        if i + 1 < len(self._cells) and not self._cells[i][j].has_right_wall and not self._cells[i+1][j].visited:
+            neighbors.append((i+1, j))
+        if j - 1 >= 0 and not self._cells[i][j].has_top_wall and not self._cells[i][j-1].visited:
+            neighbors.append((i, j-1))
+        if j + 1 < len(self._cells[i]) and not self._cells[i][j].has_bottom_wall and not self._cells[i][j+1].visited:
+            neighbors.append((i, j+1))
+        return neighbors
 
 
     def _draw_cell(self, i, j):
@@ -110,7 +122,32 @@ class Maze():
         self._cells[i][j].draw(x1, y1, x2, y2)
         self._animate()
 
+    def solve(self):
+        return self._solve_r(0,0)
+    
+    def _solve_r(self, i, j):
+        self._animate()
+
+        self._cells[i][j].visited = True
+
+        if i == len(self._cells) - 1 and j == len(self._cells[i]) - 1:
+            return True
+        
+        to_visit = self._get_unvisited_neighbors_without_walls(i,j)
+
+        for direction in to_visit:
+            new_i, new_j = direction
+            self._cells[i][j].draw_move(self._cells[new_i][new_j])
+
+            if self._solve_r(new_i, new_j):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[new_i][new_j], True)
+
+        return False
+
+
     def _animate(self):
         if self._win != None:
             self._win.redraw()
-        time.sleep(0.05)
+        time.sleep(0.01)
